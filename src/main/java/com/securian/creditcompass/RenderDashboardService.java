@@ -9,14 +9,31 @@ public class RenderDashboardService {
         for (Claim claim : claimList) {
             List<Object> claimAttributes = new ArrayList<>();
             // Assuming Claim class has attributes like claimId, amount, date, etc.
-            claimAttributes.add(claim.getClaimId());
-            claimAttributes.add(claim.getAmount());
-            claimAttributes.add(claim.getDate());
-            claimAttributes.add(claim.getType());
-            urgency =
-            claimAttributes.add(claim.getUrgency());
-            claimAttributes.add(claim.getUrgency());
-
+            claimAttributes.add(claim.getId());
+            claimAttributes.add(claim.getClaimAmt());
+            claimAttributes.add(claim.getCreationDate());
+            claimAttributes.add(claim.getClaimType());
+            urgency = claim.getUrgencyScore();
+            if (urgency >= 6) {
+                claimAttributes.add("High");
+            }
+            else if (urgency >= 3) {
+                claimAttributes.add("Medium");
+            }
+            else {
+                claimAttributes.add("Low");
+            }
+            complexity = claim.getComplexityScore();
+            // Complexity
+            if (complexity >= 7) {
+                claimAttributes.add("High");
+            }
+            else if (complexity >= 4) {
+                claimAttributes.add("Medium");
+            }
+            else {
+                claimAttributes.add("Low");
+            }
             allClaimsAttributes.add(claimAttributes);
         }
 
